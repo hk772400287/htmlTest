@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Element {
     //type Elements = {
     //elementId: null | number,
@@ -18,6 +21,44 @@ public class Element {
     private String href;
 
     private String text;
+
+    private String html;
+
+    public Element() {
+
+    }
+
+    public Element(Integer elementId, String tag, String style, String clazz, String href, String text) {
+        this.elementId = elementId;
+        this.tag = tag;
+        this.style = style;
+        this.clazz = clazz;
+        this.href = href;
+        this.text = text;
+        StringBuilder sb = new StringBuilder();
+        Map<String, String> map = new HashMap<>();
+        map.put("style", this.style);
+        map.put("clazz", this.clazz);
+        map.put("href", this.href);
+        sb.append("<").append(this.tag).append(" ");
+        for (String key : map.keySet()) {
+            if (map.get(key) != null) {
+                sb.append(key).append("=\"").append(map.get(key)).append("\" ");
+            }
+        }
+        sb.replace(sb.length() - 1, sb.length(), "");
+        sb.append(">");
+        sb.append("</").append(this.tag).append(">");
+        this.html =  sb.toString();
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
     public Integer getElementId() {
         return elementId;

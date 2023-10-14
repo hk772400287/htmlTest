@@ -7,6 +7,12 @@ public class Edge {
 
     private int number;
 
+    public Edge(Integer parentId, Integer elementId, int number) {
+        this.parentId = parentId;
+        this.elementId = elementId;
+        this.number = number;
+    }
+
     public Integer getParentId() {
         return parentId;
     }
