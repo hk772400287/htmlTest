@@ -72,7 +72,7 @@ public class Html {
             neighbors.get(edge.getParentId()).add(edge.getElementId());
         }
         StringBuilder htmlSb = dfs(0, neighbors, new HashSet<>(), elementMap, -2);
-        this.htmlString = htmlSb.toString();
+        this.htmlString = htmlSb.toString().trim();
     }
 
     private StringBuilder dfs(int curr, Map<Integer, List<Integer>> neighbors, Set<Integer> visit,
@@ -109,10 +109,19 @@ public class Html {
     }
 
     public String getHtmlByElementId(Integer id) {
-        return dfs(id, this.neighbors, new HashSet<>(), this.elementMap, 0).toString();
+        return dfs(id, this.neighbors, new HashSet<>(), this.elementMap, 0).toString().trim();
     }
 
     public String addChildren(List<Element> newElements, List<Edge> newEdges) {
-        return null;
+        for (Element e : newElements) {
+            elementMap.put(e.getElementId(), e);
+        }
+        for (Edge edge : newEdges) {
+            if (!neighbors.containsKey(edge.getParentId())) {
+                neighbors.put(edge.getParentId(), new ArrayList<>());
+            }
+            neighbors.get(edge.getParentId()).add(edge.getElementId());
+        }
+        return dfs(0, neighbors, new HashSet<>(), elementMap, -2).toString().trim();
     }
 }

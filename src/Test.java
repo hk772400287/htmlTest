@@ -47,6 +47,16 @@ public class Test {
         Html html = new Html(edges, elements);
         //System.out.println(e12.getHtml());
         //System.out.println(html.getHtmlString());
-        System.out.println(html.getHtmlByElementId(4));
+        //System.out.println(html.getHtmlByElementId(4));
+        List<Element> newElements = new ArrayList<>();
+        List<Edge> newEdges = new ArrayList<>();
+        newElements.add(new Element(14, "li", "margin: 0 0.25rem", null, null, null));
+        newElements.add(new Element(15, "a", "margin: 0 0.25rem", null, "/history", null));
+        newElements.add(new Element(16, "text", null, null, null, "HISTORIES"));
+        newEdges.add(new Edge(4, 14, 3));
+        newEdges.add(new Edge(14, 15, 0));
+        newEdges.add(new Edge(15, 16, 0));
+        System.out.println(html.addChildren(newElements, newEdges));
+
     }
 }
